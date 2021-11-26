@@ -20,18 +20,22 @@ if($_SESSION['admin'] == 1) {
 ?>
 <body>
     <h1 class="text-center mt-5">Liste utilisateurs</h1>
-    <section class="d-flex justify-content-evenly align-items-center w-100 mt-5">
+    <section class="d-flex justify-content-evenly align-items-center flex-wrap w-100">
         <?php foreach($users as $user) { ?>
-            <div class="block">
+            <div class="block text-white mt-5">
                 <p>Mail : <?= $user['email'] ?></p>
                 <p>Nom et Prenom : <?= $user['nom'] .' '. $user['prenom'] ?></p>
                 <p>Date de naissance : <?= $user['date_naissance'] ?></p>
                 
-                <?php if($user['active'] == 0) {?>
-                    <a href="active_desactive.php?id=<?=$user['id']?>&active=<?=$user['active']?>"><button type="button" class="btn btn-success">Activer</button></a>
-                <?php }else {?>
+                <?php if($user['admin'] == 0) {
+                    if($user['active'] == 0){?>
+                        <a href="active_desactive.php?id=<?=$user['id']?>&active=<?=$user['active']?>"><button type="button" class="btn btn-success">Activer</button></a>
+                <?php }
+                else {?>
                     <a href="active_desactive.php?id=<?=$user['id']?>&active=<?=$user['active']?>"><button type="button" class="btn btn-danger">Desactiver</button></a>
-                <?php } ?>
+                <?php } 
+                }?>
+                <a href="delete_user.php?id=<?= $user['id'] ?>"><button type="button" class="btn btn-warning">Supprimer</button></a>
             </div>
         <?php } ?>
     </section>

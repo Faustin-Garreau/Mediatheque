@@ -39,14 +39,24 @@ if(isset($_POST['mail_connect']) && isset($_POST['password_connect'])) {
     
 </head>
 <body>
-    <section>
-        <form action="index.php" method="POST">
-        <input type="email" placeholder="Email" name="mail_connect" required>
-        <input type="password" placeholder="Mot de passe" name="password_connect" required>
-        <input type="submit" placeholder="Envoyer">
-        </form>
-        <a href="create.php">Pas de compte ? Cliquez ici</a>
-        <?php if (isset($erreur_log)) { ?><p class="text-danger"><?= $erreur_log ?></p><?php } ?>
-    </section>
+    <div class="d-flex justify-content-center align-center">
+  <form class="form-horizontal" action="index.php" method="POST">
+    <div class="form-group">
+      <div>
+        <input type="email" class="form-control" placeholder="Email" name="mail_connect" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <div>          
+        <input type="password" class="form-control"  placeholder="Mot de passe" name="password_connect" required>
+      </div>
+    </div>
+    <div class="form-group">        
+      <div>
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+      </div>
+    </div>
+  </form>
+</div>
 </body>
 </html>

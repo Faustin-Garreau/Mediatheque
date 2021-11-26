@@ -2,19 +2,15 @@
 require_once('config.php');
 
 if(isset($_POST['titre_livre_create']) && isset($_POST['file_livre_create']) && isset($_POST['description_livre_create']) && isset($_POST['auteur_livre_create']) && isset($_POST['genre_livre_create']) && isset($_POST['date_parution_create_livre'])) {
-    var_dump('je rentre');
     $titre_create = htmlspecialchars($_POST['titre_livre_create']);
     $image_create = $_POST['file_livre_create'];
     $description_create = htmlspecialchars($_POST['description_livre_create']);
     $auteur_create = htmlspecialchars($_POST['auteur_livre_create']);
     $genre_create = htmlspecialchars($_POST['genre_livre_create']);
     $date_parution_create = $_POST['date_parution_create_livre'];
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
 		$insert = $dbh->prepare("INSERT INTO livre(titre, image, description, auteur, genre, date_parution) VALUES(?, ?, ?, ?, ?, ?)");
 		$insert->execute(array($titre_create, $image_create, $description_create, $auteur_create, $genre_create, $date_parution_create));
-        $erreur = "livre créé avec succès";
-		header('location:ajouter_livre.php');
+		header('location:livre.php');
 	}
 ?>
 
@@ -30,8 +26,9 @@ if(isset($_POST['titre_livre_create']) && isset($_POST['file_livre_create']) && 
     <title>Document</title>
 </head>
 <?php include('header.php'); ?>
+<?php if($_SESSION['admin'] == 1) { ?>
 <body>
-<section>
+<section class="d-flex justify-content-center mt-5">
         <form action="ajouter_livre.php" method="POST">
         <input type="text" placeholder="Titre" name="titre_livre_create" required>
         <input type="file" name="file_livre_create">
@@ -42,5 +39,6 @@ if(isset($_POST['titre_livre_create']) && isset($_POST['file_livre_create']) && 
         <input type="submit" placeholder="Envoyer">
         </form>
     </section>
+<?php } ?>
 </body>
 </html>
